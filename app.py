@@ -23,8 +23,11 @@ def kill():
 def update():
     if request.method == "POST":
         ser.write(b"r")
-        data = ser.readline()
-        return json.jsonify(request.json)
+        data = ser.readline().split()
+        r = {}
+        r["Temperature"] = int(data[0][1:data[0].index('.')])
+        r["Humidity"] = int(data[1][1:data[1].index('.'))
+        return json.jsonify(r)
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=3000)
