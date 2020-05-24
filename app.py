@@ -26,7 +26,7 @@ def update():
         data = ser.readline().split()
         r = {}
         r["Temperature"] = int(data[0][1:data[0].index('.')])
-        r["Humidity"] = int(data[1][1:data[1].index('.'))
+        r["Humidity"] = int(data[1][1:data[1].index('.')])
         return json.jsonify(r)
 
 if __name__ == "__main__":
