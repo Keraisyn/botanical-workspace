@@ -13,14 +13,21 @@ class Plant extends React.Component {
         console.log("smh")
         const requestOptions = {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' }
+            headers: {
+                'Content-Length': 0,
+                'Access-Control-Allow-Origin': '*'
+            },
         };
-        fetch('http://localhost:5000/kill', requestOptions)
+        fetch('http://localhost:3002/kill', requestOptions)
             .then(response => response.json())
             .then(data => this.setState({ postId: data.id }));
         this.setState({
             failed: true,
+<<<<<<< HEAD
+        });
+=======
         })
+>>>>>>> master
     }
 
     render() {
