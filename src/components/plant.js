@@ -70,7 +70,7 @@ class Plant extends React.Component {
     render() {
         return (
             <div className="container">
-                {/*<LineGraph />*/}
+                <LineGraph />
                 <Tree stage={this.state.stage}/>
                 <Timer minutes={0} seconds={0} isOn={false} ifFailed={() => this.handleFail()}
                        ifStarted={() => this.handleStart()} changeStage={this.handleStageChange}/>
