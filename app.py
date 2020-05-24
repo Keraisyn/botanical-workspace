@@ -18,13 +18,6 @@ def kill():
         return json.jsonify({"data": "kill"})
         #kill here
 
-@app.route('/water', methods=["POST"])
-@cross_origin(origin='*',headers=['Content-Type'])
-def water():
-    if request.method == "POST":
-        print("water")
-        return json.jsonify({"data": "water"})
-        #water here
 
 @app.route('/update', methods=["POST"]) 
 @cross_origin(origin='*',headers=['Content-Type'])
