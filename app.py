@@ -5,12 +5,14 @@ app = Flask(__name__)
 @app.route('/kill', methods=["POST"])
 def kill():
     if request.method == "POST":
+        print("kill")
         return "Killing Plant"
         #kill here
 
 @app.route('/water', methods=["POST"])
 def water():
     if request.method == "POST":
+        print("water")
         return "Watering Plant"
         #water here
 

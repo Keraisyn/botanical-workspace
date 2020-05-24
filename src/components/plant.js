@@ -11,6 +11,13 @@ class Plant extends React.Component {
 
     handleFail() {
         console.log("smh")
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' }
+        };
+        fetch('http://localhost:5000/kill', requestOptions)
+            .then(response => response.json())
+            .then(data => this.setState({ postId: data.id }));
         this.setState({
             failed: true,
         })
