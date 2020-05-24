@@ -2,13 +2,13 @@ from flask import Flask , request
 
 app = Flask(__name__)
 
-@app.route('/kill')
+@app.route('/kill', methods=["POST"])
 def kill():
     if request.method == "POST":
         return "Killing Plant"
         #kill here
 
-@app.route('/water')
+@app.route('/water', methods=["POST"])
 def water():
     if request.method == "POST":
         return "Watering Plant"
