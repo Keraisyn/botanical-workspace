@@ -6,21 +6,29 @@ class Timer extends React.Component {
         this.state = {
             minutes: this.props.minutes,
             seconds: this.props.seconds,
+            totalSecs: 0,
             isOn: false,
         }
         this.handleTimerStart = this.handleTimerStart.bind(this);
     }
 
     handleTimerStart() {
+        this.props.ifStarted();
+
+        this.props.changeStage("empty")
+
         this.setState({
             isOn: true,
+            totalSecs: this.state.minutes * 60 + this.state.seconds,
         })
 
         this.myInterval = setInterval(() => {
-            const {seconds, minutes} = this.state
+            const {seconds, minutes, totalSecs} = this.state
 
+            // Check if timer has stopped
             if (!this.state.isOn) {
                 clearInterval(this.myInterval)
+                this.props.changeStage("dead");
             }
 
             if (seconds > 0) {
@@ -28,11 +36,20 @@ class Timer extends React.Component {
                     seconds: seconds - 1
                 }))
             }
+
+            const t = minutes * 60 + seconds;
+
+            // Change tree stuffs
+            if (t <= totalSecs / 3) {
+                this.props.changeStage("twos");
+            } else if (t <= totalSecs / 3 * 2) {
+                this.props.changeStage("third");
+            }
+
             if (seconds === 0) {
-                console.log("seconds 0")
-                console.log(minutes)
                 if (minutes === 0) {
                     clearInterval(this.myInterval)
+                    this.props.changeStage("full");
                 } else {
                     this.setState(({minutes}) => ({
                         minutes: minutes - 1,
