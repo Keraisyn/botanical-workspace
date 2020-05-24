@@ -11,7 +11,6 @@ class Timer extends React.Component {
         this.handleTimerStart = this.handleTimerStart.bind(this);
     }
 
-
     handleTimerStart() {
         this.setState({
             isOn: true,
@@ -19,6 +18,10 @@ class Timer extends React.Component {
 
         this.myInterval = setInterval(() => {
             const {seconds, minutes} = this.state
+
+            if (!this.state.isOn) {
+                clearInterval(this.myInterval)
+            }
 
             if (seconds > 0) {
                 this.setState(({seconds}) => ({
@@ -40,16 +43,20 @@ class Timer extends React.Component {
         }, 1000)
     }
 
+    componentDidMount() {
+        document.addEventListener("visibilitychange", () => {
+            if (document.hidden && this.state.isOn === true) {
+                this.props.ifFailed();
+                this.setState({
+                    isOn:false,
+                })
+            }
+        })
+    }
+
     componentWillUnmount() {
         clearInterval(this.myInterval)
     }
-
-    // handleTimerStart() {
-    //     console.log("handles")
-    //     this.setState({
-    //         isOn: true,
-    //     })
-    // }
 
     render() {
         const {minutes, seconds, isOn} = this.state
@@ -66,7 +73,8 @@ class Timer extends React.Component {
         } else {
             return (
                 <div>
-                    <div className="form-row mb-4 w-25 mx-auto">
+                    {/* Minute and Second Input */}
+                    <div className="form-row mb-4 w-50 mx-auto">
                         <div className="col">
                             <input onChange={event => this.setState({minutes: parseInt(event.target.value, 10)})}
                                    type="number"
@@ -78,8 +86,6 @@ class Timer extends React.Component {
                                    className="form-control" placeholder="Seconds"/>
                         </div>
                     </div>
-                    <p>{this.state.minutes}</p>
-                    <p>{this.state.seconds}</p>
                     <button onClick={this.handleTimerStart} className="btn btn-success btn-lg">Start Timer</button>
                 </div>
             )
