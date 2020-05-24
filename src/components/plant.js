@@ -69,11 +69,18 @@ class Plant extends React.Component {
 
     render() {
         return (
-            <div className="container">
-                <LineGraph />
-                <Tree stage={this.state.stage}/>
-                <Timer minutes={0} seconds={0} isOn={false} ifFailed={() => this.handleFail()}
-                       ifStarted={() => this.handleStart()} changeStage={this.handleStageChange}/>
+            <div className="container-fluid p-2">
+                <div className="row">
+                    <div className="col-7">
+                        <Tree stage={this.state.stage}/>
+                        <Timer minutes={0} seconds={0} isOn={false} ifFailed={() => this.handleFail()}
+                               ifStarted={() => this.handleStart()} changeStage={this.handleStageChange} />
+                    </div>
+                    <div className="col-4 pt-5 mt-5">
+                        <LineGraph />
+                    </div>
+                    <div className="col-1"></div>
+                </div>
             </div>
         )
     }

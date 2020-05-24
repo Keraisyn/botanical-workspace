@@ -8,6 +8,7 @@ class Timer extends React.Component {
             seconds: this.props.seconds,
             totalSecs: 0,
             isOn: false,
+            failed: false,
         }
         this.handleTimerStart = this.handleTimerStart.bind(this);
     }
@@ -66,6 +67,7 @@ class Timer extends React.Component {
                 this.props.ifFailed();
                 this.setState({
                     isOn:false,
+                    failed:true,
                 })
             }
         })
@@ -76,14 +78,22 @@ class Timer extends React.Component {
     }
 
     render() {
-        const {minutes, seconds, isOn} = this.state
+        const {minutes, seconds, isOn, failed} = this.state
+
+        if (failed) {
+            return (
+                <div>
+                    <h1 className="display-4">You failed D^:</h1>
+                </div>
+            )
+        }
 
         if (isOn) {
             return (
                 <div>
                     {minutes === 0 && seconds === 0
-                        ? <h1>You made it!</h1>
-                        : <h1>Time Remaining: {minutes}:{seconds < 10 ? `0${seconds}` : seconds}</h1>
+                        ? <h1 className="display-4">You made it!</h1>
+                        : <h1 className="display-4">Time Remaining: {minutes}:{seconds < 10 ? `0${seconds}` : seconds}</h1>
                     }
                 </div>
             )

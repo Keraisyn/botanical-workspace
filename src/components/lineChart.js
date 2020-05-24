@@ -46,8 +46,9 @@ export default class LineGraph extends React.Component {
     chartRef = React.createRef();
 
     componentDidMount() {
-        this.graphUpdate();
-        const myChartRef = this.chartRef.current.getContext("2d");
+        // this.graphUpdate();
+
+        const myChartRef = this.chartRef.current.getContext("2d")
 
         new Chart(myChartRef, {
             type: "line",
@@ -58,22 +59,43 @@ export default class LineGraph extends React.Component {
                     {
                         label: "Humidity",
                         data: [],
+                        backgroundColor: "rgba(28,114,147,255)"
                     },
                     {
                         label: "Temperature",
                         data: [],
+                        backgroundColor: "rgba(246, 174, 45, 255)"
                     }
                 ]
             },
             options: {
-                //Customize chart options
+                scales: {
+                    xAxes: [{
+                        gridLines: { color: "#FFFFFF" },
+                        ticks: {
+                            beginAtZero: true,
+                            fontColor: 'white'
+                        },
+                    }],
+                    yAxes: [{
+                        gridLines: { color: "#FFFFFF" },
+                        ticks: {
+                            fontColor: "white"
+                        }
+                    }]
+                },
+                legend: {
+                    labels: {
+                        // This more specific font property overrides the global property
+                        fontColor: 'white'
+                    }
+                },
             }
         });
     }
     render() {
-        
         return (
-            <div className={classes.graphContainer}>
+            <div>
                 <canvas
                     id="myChart"
                     ref={this.chartRef}

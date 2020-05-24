@@ -7,7 +7,7 @@ import Plant from "./components/plant";
 function App() {
     return (
         <div className="App">
-            <NavBar name="Matthews Ma"/>
+            <NavBar name="Made with <3 by Matthews, Samer, Rohan, and Harry"/>
             <div className="plant-container">
                 <Plant/>
             </div>
