@@ -23,7 +23,11 @@ class Plant extends React.Component {
             .then(data => this.setState({ postId: data.id }));
         this.setState({
             failed: true,
+<<<<<<< HEAD
         });
+=======
+        })
+>>>>>>> master
     }
 
     render() {
