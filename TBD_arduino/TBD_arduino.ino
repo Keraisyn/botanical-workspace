@@ -74,7 +74,7 @@ void loop() {
       Serial.println("Error reading humidity!");
     }
     else {
-      Serial.print("H");
+      Serial.print(" H");
       Serial.println(event.relative_humidity); 
     }
 
