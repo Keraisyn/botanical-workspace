@@ -1,12 +1,10 @@
 import React from "react";
 import Timer from "./timer";
-import LineGraph from "./lineChart";
-import axios from 'axios';
 
 class Plant extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
+        this.state ={
             failed: false,
         }
     }
@@ -23,18 +21,11 @@ class Plant extends React.Component {
         this.setState({
             failed: true,
         })
-
-        axios.post("/kill")
-            .then(res => {
-                console.log(res);
-                console.log(res.data);
-            })
     }
 
     render() {
         return (
             <div className="container">
-                <LineGraph />
                 <h1>{this.state.failed === false ? "" : "You failed D^:"}</h1>
                 <Timer minutes={0} seconds={0} isOn={false} ifFailed={() => this.handleFail()}/>
             </div>
